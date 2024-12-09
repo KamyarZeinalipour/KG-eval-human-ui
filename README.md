@@ -261,5 +261,6 @@ Person_A;works_at;Company_X,Person A works at Company X.,Person_A;employed_by;Co
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 ---
+## Contact
 
-*For any issues or questions, please contact the project maintainer.*
+For any questions or issues, please contact Kamyar Zeinalipour at [Kzeinalipour@umass.edu].
