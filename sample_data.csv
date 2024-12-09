@@ -1,0 +1,4 @@
+oreginal triple,generated text,generated triple
+Person_A;works_at;Company_X,Person A works at Company X.,Person_A;employed_by;Company_X
+Person_B;born_in;City_Y,Person B was born in City Y.,Person_B;originates_from;City_Y
+Person_C;married_to;Person_D,Person C is married to Person D.,Person_C;spouse;Person_D
