@@ -41,8 +41,8 @@ This annotation tool facilitates this evaluation by presenting annotators with o
 1. **Clone the Repository (if applicable)**:
 
    ```bash
-   git clone https://github.com/yourusername/annotation-tool.git
-   cd annotation-tool
+   git clone https://github.com/yourusername/KG-eval-human-ui.git
+   cd KG-eval-human-ui
    ```
 
 2. **Install Required Python Libraries**:
