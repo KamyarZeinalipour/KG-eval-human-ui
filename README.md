@@ -258,7 +258,7 @@ Person_A;works_at;Company_X,Person A works at Company X.,Person_A;employed_by;Co
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 ---
 
