@@ -161,7 +161,7 @@ Each rating category has four options:
    - **Originality, Engagement, and Creativity Rating**
    - **Generated Triple Rating**
 5. **Add Comments** (Optional but encouraged): Provide any additional insights or notes about the annotation.
-6. **Validate**: Once all ratings are selected, the "Validate" button becomes enabled. Click it to submit your annotation.
+6. **Save and Continue**: Once all ratings are selected, the "Save and Continue" button becomes enabled. Click it to submit your annotation.
 7. **Proceed to Next Entry**: The tool will automatically load the next entry. Repeat the process.
 
 **Note**: If any rating is missing, the "Validate" button will remain disabled to prevent incomplete submissions.
@@ -203,9 +203,6 @@ You can modify the tool to suit your specific needs. Here are some ways to custo
 
 ---
 
-## Contributing
-
-Contributions are welcome! If you have suggestions for improvements, please submit an issue or a pull request on the GitHub repository.
 
 **To Contribute**:
 
@@ -218,7 +215,7 @@ Contributions are welcome! If you have suggestions for improvements, please subm
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.txt).
 
 ---
 
@@ -293,7 +290,7 @@ Below are the detailed descriptions for each rating in all categories to guide a
 
 ## 2. Structure, Grammar, and Fluency Rating
 
-**Purpose**: Evaluates the readability and technical writing quality of the generated text.
+**Purpose**: Evaluate the readability and technical writing quality of the generated text.
 
 - **Rating-A**: *Gold Standard*
   - The text is well-structured and flows logically.
