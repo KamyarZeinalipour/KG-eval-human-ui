@@ -192,11 +192,8 @@ def main(current_index: int = 0, annotator_name: str = "", examples_batch_folder
                 - **Skipping**: Skip this entry if you cannot provide a rating.
                 """)
 
-                # Comments box
-                comments = gr.Textbox(label="Comments")
 
-                # Validate button (will be enabled based on ratings)
-                eval_btn = gr.Button("Save and Continue", interactive=False)
+
 
             with gr.Column():
                 # Display the 'generated triple' field
@@ -210,6 +207,7 @@ def main(current_index: int = 0, annotator_name: str = "", examples_batch_folder
                     label="Generated Triple Rating"
                 )
 
+
                 # Definitions for 'Generated Triple Rating'
                 gr.Markdown("**Definitions for Generated Triple Rating:**")
                 gr.Markdown("""
@@ -218,7 +216,10 @@ def main(current_index: int = 0, annotator_name: str = "", examples_batch_folder
                 - **Rating-F**: *Insufficient* - The generated triple is inaccurate or does not represent the generated text.
                 - **Skipping**: Skip this entry if you cannot provide a rating.
                 """)
-
+                # Comments box
+                comments = gr.Textbox(label="Comments")
+                # Validate button (will be enabled based on ratings)
+                eval_btn = gr.Button("Save and Continue", interactive=False)
             # Function to update the Validate button based on ratings
             def update_validate_button(
                 content_accuracy_rating_value,
