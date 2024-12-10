@@ -1,266 +1,433 @@
-# Annotation Tool for Evaluating Generated Text and Regenerated Triples from KG Triples
+# README
+
+## Annotator Evaluation Tool for KG Triples and Generated Text
 
 This tool provides an interactive interface for annotators to evaluate generated text from Knowledge Graph (KG) triples and the regenerated triples from that text using Large Language Models (LLMs). It streamlines the annotation process, allowing annotators to provide ratings and comments on the quality and accuracy of the generated content.
 
+The tool is built using Python, Gradio for the web interface, and Pandas for data handling. It collects annotations and saves them to a CSV file for further analysis.
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
 - [Features](#features)
-- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Running the Annotation Tool](#running-the-annotation-tool)
-  - [Annotation Interface](#annotation-interface)
-- [Sample Data](#sample-data)
+  - [Command-Line Arguments](#command-line-arguments)
+  - [Running the Tool](#running-the-tool)
+- [Interface Overview](#interface-overview)
+  - [Input Fields](#input-fields)
+  - [Rating Categories](#rating-categories)
+  - [Ratings Definitions](#ratings-definitions)
+- [Annotation Process](#annotation-process)
 - [Output](#output)
 - [Customization](#customization)
-- [Notes](#notes)
+- [Contributing](#contributing)
 - [License](#license)
 
-## Overview
-
-In the realm of Knowledge Graphs, transforming triples into natural language text and then back into triples using LLMs is a common task. Evaluating the quality of this process is crucial for improving the performance of LLMs and ensuring the accuracy of the regenerated triples.
-
-This annotation tool facilitates this evaluation by presenting annotators with original KG triples, generated text from those triples, and regenerated triples from the generated text. Annotators can assess the quality of the generated text and the regenerated triples, providing ratings and comments to guide improvements.
+---
 
 ## Features
 
-- **Interactive Annotation Interface**: Utilizes Gradio to create a user-friendly web interface.
-- **Rating System**: Allows annotators to rate both the generated text and the regenerated triples using predefined criteria.
-- **Comments Section**: Annotators can provide additional feedback or notes.
-- **Progress Tracking**: Remembers the current position in the dataset, allowing annotators to resume where they left off.
-- **Data Persistence**: Saves annotations to a CSV file for further analysis.
+- **Interactive Annotation Interface**: Provides a user-friendly interface for annotators to evaluate generated text and triples.
+- **Customizable Ratings**: Allows for detailed ratings across multiple categories with clear definitions.
+- **Data Persistence**: Saves annotations to CSV files for later analysis.
+- **Progress Tracking**: Remembers the last annotated entry and resumes from there.
+- **Error Handling**: Ensures that incomplete annotations are not saved and prompts annotators to complete all fields.
 
-## Prerequisites
-
-- **Python 3.6 or later**
-- **Pip package manager**
+---
 
 ## Installation
 
-1. **Clone the Repository (if applicable)**:
+1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/KG-eval-human-ui.git
-   cd KG-eval-human-ui
+   git clone https://github.com/yourusername/yourrepository.git
+   cd yourrepository
    ```
 
-2. **Install Required Python Libraries**:
-
-   Install the necessary Python packages using `pip`:
+2. **Create a Virtual Environment** (optional but recommended):
 
    ```bash
-   pip install gradio pandas fire
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 
-   If you encounter any permissions issues, you might need to use `pip3` or add `--user`:
+3. **Install Dependencies**:
 
    ```bash
-   pip3 install gradio pandas fire --user
+   pip install -r requirements.txt
    ```
+
+   **Dependencies**:
+
+   - Python 3.x
+   - Gradio
+   - Pandas
+   - Fire
+
+---
 
 ## Usage
 
-### Running the Annotation Tool
+### Command-Line Arguments
 
-To start the annotation tool, run the script `annotation_tool.py` with the required arguments:
+- `current_index` (optional): The index to start annotation from (default is `0`).
+- `annotator_name`: **(Required)** Name or identifier for the annotator.
+- `examples_batch_folder`: **(Required)** Path to the CSV file containing the batch of examples to annotate.
+
+### Running the Tool
+
+Run the script using the command line:
 
 ```bash
-python annotation_tool.py --annotator_name="Your Name" --examples_batch_folder="path_to_your_csv.csv"
+python annotation_tool.py --annotator_name="YourName" --examples_batch_folder="path/to/your/dataset.csv"
 ```
-
-- **Arguments**:
-  - `--annotator_name`: *(Required)* Your name or identifier as an annotator.
-  - `--examples_batch_folder`: *(Required)* Path to the CSV file containing the data to annotate.
-  - `--current_index`: *(Optional)* The index to start annotation from (useful for resuming).
 
 **Example**:
 
 ```bash
-python annotation_tool.py --annotator_name="Alice" --examples_batch_folder="sample_data.csv"
+python annotation_tool.py --annotator_name="Alice" --examples_batch_folder="./data/kg_triples.csv"
 ```
 
-### Annotation Interface
+---
 
-Upon running the script, a Gradio interface will launch in your default web browser. If it doesn't open automatically, look for a URL in the terminal output (e.g., `http://127.0.0.1:7860`) and open it in your browser.
+## Interface Overview
 
-**Interface Overview**:
+When you run the script, a local Gradio web interface will launch in your default web browser.
 
-- **Left Side**:
-  - **Original Triple**: Displays the original KG triple.
-  - **Generated Text**: Displays the text generated from the original triple.
-  - **Generated Text Rating**: A radio button group where you can rate the quality of the generated text.
-  - **Comments**: A textbox to add any comments or observations.
+### Input Fields
 
-- **Right Side**:
-  - **Generated Triple**: Shows the triple regenerated from the generated text by an LLM.
-  - **Generated Triple Rating**: A radio button group where you can rate the quality of the regenerated triple.
-  - **Ratings Definitions**: Describes the meaning of each rating for reference.
+- **Original Triple**: Displays the original Knowledge Graph triple(s).
+- **Generated Text**: Shows the text generated from the original triple(s).
+- **Generated Triple**: Presents the triple(s) regenerated from the generated text.
 
-**Rating Options**:
+### Rating Categories
 
-- **A**: *Gold Standard* - The content is fully relevant and helpful.
-- **B**: *Silver Standard* - The content is somewhat relevant and partially helpful.
-- **F**: *Insufficient* - The content is not relevant or not helpful.
+Annotators are required to provide ratings in the following categories:
+
+1. **Content and Related Accuracy Rating**
+2. **Structure, Grammar, and Fluency Rating**
+3. **Originality, Engagement, and Creativity Rating**
+4. **Generated Triple Rating**
+
+Each rating category has four options:
+
+- **Rating-A**
+- **Rating-B**
+- **Rating-F**
+- **Skipping**
+
+### Ratings Definitions
+
+#### 1. Content and Related Accuracy Rating
+
+- **Rating-A**: *Gold Standard* - The content is fully accurate and completely aligns with the original data.
+- **Rating-B**: *Silver Standard* - The content is mostly accurate with minor deviations from the original data.
+- **Rating-F**: *Insufficient* - The content is inaccurate or does not align with the original data.
 - **Skipping**: Skip this entry if you cannot provide a rating.
 
-**Annotation Steps**:
+#### 2. Structure, Grammar, and Fluency Rating
 
-1. **Review the Original Triple and Generated Text**:
-   - Read the original KG triple.
-   - Read the text generated from the triple.
+- **Rating-A**: *Gold Standard* - The text is well-structured, grammatically correct, and reads fluently.
+- **Rating-B**: *Silver Standard* - The text has minor structural or grammatical errors but remains understandable.
+- **Rating-F**: *Insufficient* - The text has significant grammatical or structural issues that hinder understanding.
+- **Skipping**: Skip this entry if you cannot provide a rating.
 
-2. **Provide Ratings**:
-   - Select a rating for "Generated Text Rating".
-   - Review the "Generated Triple" regenerated by the LLM.
-   - Select a rating for "Generated Triple Rating".
+#### 3. Originality, Engagement, and Creativity Rating
 
-3. **Add Comments** (Optional):
-   - Provide any additional feedback or notes in the "Comments" box.
+- **Rating-A**: *Gold Standard* - The content is highly original, engaging, and creatively presented.
+- **Rating-B**: *Silver Standard* - The content shows some originality and is moderately engaging.
+- **Rating-F**: *Insufficient* - The content lacks originality and fails to engage the reader.
+- **Skipping**: Skip this entry if you cannot provide a rating.
 
-4. **Validate**:
-   - The "Validate" button will become active once both ratings are selected.
-   - Click "Validate" to save your annotations and proceed to the next entry.
+#### 4. Generated Triple Rating
 
-5. **Proceed to Next Entry**:
-   - The interface will automatically load the next entry.
-   - Repeat the steps until all entries are annotated.
+- **Rating-A**: *Gold Standard* - The generated triple accurately represents the information from the generated text.
+- **Rating-B**: *Silver Standard* - The generated triple mostly represents the information with minor inaccuracies.
+- **Rating-F**: *Insufficient* - The generated triple is inaccurate or does not represent the generated text.
+- **Skipping**: Skip this entry if you cannot provide a rating.
 
-6. **Completion**:
-   - Upon reaching the end of the dataset, an "End of dataset" message will appear.
+---
 
-**Notes**:
+## Annotation Process
 
-- If you need to pause, you can exit the interface, and the progress will be saved. When you restart the tool with the same `annotator_name` and `examples_batch_folder`, it will resume from where you left off.
-- Ensure you do not close the terminal while annotating, as the interface relies on the running script.
+1. **Review the Original Triple**: Read the original Knowledge Graph triple(s) provided.
+2. **Examine the Generated Text**: Read the text generated from the original triple(s).
+3. **Assess the Generated Triple**: Look at the triple(s) regenerated from the generated text.
+4. **Provide Ratings**: For each of the four categories, select a rating based on the definitions provided.
+   - **Content and Related Accuracy Rating**
+   - **Structure, Grammar, and Fluency Rating**
+   - **Originality, Engagement, and Creativity Rating**
+   - **Generated Triple Rating**
+5. **Add Comments** (Optional but encouraged): Provide any additional insights or notes about the annotation.
+6. **Validate**: Once all ratings are selected, the "Validate" button becomes enabled. Click it to submit your annotation.
+7. **Proceed to Next Entry**: The tool will automatically load the next entry. Repeat the process.
 
-## Sample Data
+**Note**: If any rating is missing, the "Validate" button will remain disabled to prevent incomplete submissions.
 
-### Generating a Sample CSV File
-
-For testing purposes, you can generate a sample CSV file using the provided script:
-
-```python
-import pandas as pd
-
-# Sample data
-data = {
-    'oreginal triple': [
-        'Person_A;works_at;Company_X',
-        'Person_B;born_in;City_Y',
-        'Person_C;married_to;Person_D'
-    ],
-    'generated text': [
-        'Person A works at Company X.',
-        'Person B was born in City Y.',
-        'Person C is married to Person D.'
-    ],
-    'generated triple': [
-        'Person_A;employed_by;Company_X',
-        'Person_B;originates_from;City_Y',
-        'Person_C;spouse;Person_D'
-    ]
-}
-
-# Create DataFrame
-df = pd.DataFrame(data)
-
-# Save to CSV
-df.to_csv('sample_data.csv', index=False)
-
-print("Sample CSV file 'sample_data.csv' has been created.")
-```
-
-**Instructions**:
-
-1. Save the above code to a file, e.g., `generate_sample_data.py`.
-2. Run the script:
-
-   ```bash
-   python generate_sample_data.py
-   ```
-
-3. This will create a `sample_data.csv` file in the current directory.
-
-**Sample CSV Structure**:
-
-```csv
-oreginal triple,generated text,generated triple
-Person_A;works_at;Company_X,Person A works at Company X.,Person_A;employed_by;Company_X
-Person_B;born_in;City_Y,Person B was born in City Y.,Person_B;originates_from;City_Y
-Person_C;married_to;Person_D,Person C is married to Person D.,Person_C;spouse;Person_D
-```
-
-You can use this sample data to test the annotation tool:
-
-```bash
-python annotation_tool.py --annotator_name="Test Annotator" --examples_batch_folder="sample_data.csv"
-```
+---
 
 ## Output
 
-- **Annotations File**:
-  - Annotations are saved in a CSV file within an `annotations` folder in the current working directory.
-  - The filename is prefixed with `annotations_` followed by the original dataset filename (e.g., `annotations_sample_data.csv`).
+Annotated data is saved in a CSV file located in the `annotations` folder, named `annotations_{dataset_filename}`.
 
-- **Content of the Annotations File**:
-  - Includes all original data columns.
-  - Adds additional columns:
-    - `timestamp`: Unix timestamp when the annotation was made.
-    - `annotator`: The annotator's name.
-    - `comments`: The annotator's comments.
-    - `Generated Text Rating`: The rating given to the generated text.
-    - `Generated Triple Rating`: The rating given to the regenerated triple.
+**Saved Information Includes**:
 
-**Example of Annotations CSV**:
+- Original data from the input CSV (e.g., `original triple`, `generated text`, `generated triple`).
+- Timestamp of the annotation.
+- Annotator's name.
+- Comments.
+- Ratings for each category:
+  - `Content and Related Accuracy Rating`
+  - `Structure, Grammar, and Fluency Rating`
+  - `Originality, Engagement, and Creativity Rating`
+  - `Generated Triple Rating`
 
-```csv
-oreginal triple,generated text,generated triple,timestamp,annotator,comments,Generated Text Rating,Generated Triple Rating
-Person_A;works_at;Company_X,Person A works at Company X.,Person_A;employed_by;Company_X,1697065800.123456,"Test Annotator","No Comments","A","B"
-...
-```
+**Example Output Row**:
+
+| timestamp    | annotator | comments      | Content and Related Accuracy Rating | Structure, Grammar, and Fluency Rating | Originality, Engagement, and Creativity Rating | Generated Triple Rating | original triple                   | generated text                                                                                  | generated triple                 |
+|--------------|-----------|---------------|-------------------------------------|----------------------------------------|-----------------------------------------------|-------------------------|-----------------------------------|------------------------------------------------------------------------------------------------|-----------------------------------|
+| 1631234567.8 | Alice     | Well written. | A                                   | A                                      | B                                             | A                       | (Paris, capital of, France)       | "Paris is the capital city of France, known for its art, fashion, and culture."                | (Paris, capital of, France)       |
+
+---
 
 ## Customization
 
-- **Column Names**:
-  - The script expects specific column names: `'oreginal triple'`, `'generated text'`, and `'generated triple'`.
-  - If your dataset uses different column names, you can adjust the column names in the script accordingly.
+You can modify the tool to suit your specific needs. Here are some ways to customize it:
 
-- **Ratings Definitions**:
-  - The definitions for ratings "A", "B", and "F" can be modified in the interface by editing the markdown sections in the script.
+- **Adjust Rating Options**: Modify the rating scales or categories in the code if your evaluation criteria change.
+- **Change Definitions**: Update the ratings definitions to match your project's guidelines.
+- **Add New Fields**: Include additional input or output fields in the interface and CSV file.
+- **Interface Design**: Customize the interface's appearance using Gradio's theming options or by modifying the CSS.
 
-- **Annotation Fields**:
-  - Additional fields or ratings can be added to the interface and saved in the annotations file by updating the script's UI components and the `store_annotation_and_get_next` function.
+---
 
-## Notes
+## Contributing
 
-- **Spelling**:
-  - The term "oreginal triple" is used as per the original requirements.
+Contributions are welcome! If you have suggestions for improvements, please submit an issue or a pull request on the GitHub repository.
 
-- **Data Integrity**:
-  - Ensure that the input CSV file is properly formatted and contains the required columns to prevent runtime errors.
+**To Contribute**:
 
-- **Resuming Annotation**:
-  - The tool tracks progress by checking the existing annotations file. If you need to restart annotations from a specific index, you can use the `--current_index` argument.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes.
+4. Submit a pull request explaining your changes.
 
-- **Dependencies**:
-  - The tool relies on Gradio for the web interface and Pandas for data manipulation. These should be installed as per the instructions.
+---
 
-- **Port Configuration**:
-  - By default, Gradio runs on port 7860. If this port is in use or you need to change it, you can modify the `demo.launch()` line in the script to specify a different port:
+## License
 
-    ```python
-    demo.launch(server_port=7861)
-    ```
+This project is licensed under the [MIT License](LICENSE).
 
-- **Security**:
-  - The interface is intended for local use. If deploying over a network, consider the security implications and protect the interface appropriately.
+---
+
+# Additional Details
+
+## Dependencies
+
+- **Python 3.x**: Ensure you have Python 3 installed.
+- **Gradio**: Used for building the web interface. Install via `pip install gradio`.
+- **Pandas**: For data manipulation and CSV handling. Install via `pip install pandas`.
+- **Fire**: A library for creating command-line interfaces. Install via `pip install fire`.
+
+## File Structure
+
+- **`annotation_tool.py`**: The main script that runs the annotation tool.
+- **`data/`**: Folder where your input CSV files are stored.
+- **`annotations/`**: Folder where the output annotated CSV files are saved.
+- **`requirements.txt`**: Lists all Python dependencies.
+
+## Input Data Format
+
+The input CSV file should contain at least the following columns:
+
+- `origial triple` (or `original triple`)
+- `generated text`
+- `generated triple`
+
+**Note**: The script ensures that these columns exist and fills any missing values with `[empty]`.
+
+## Error Handling and Continuity
+
+- The tool automatically resumes from the last annotated index if the annotation process is interrupted.
+- It prevents incomplete annotations by disabling the "Validate" button until all ratings are provided.
+- If the end of the dataset is reached, the tool displays a message indicating completion.
+
+## Example Command
+
+```bash
+python annotation_tool.py --annotator_name="Bob" --examples_batch_folder="./data/sample_triples.csv"
+```
+
+## Contact
+
+For any questions or support, please contact [your email or contact information].
+
+---
+
+# Rating Categories Detailed Descriptions
+
+Below are the detailed descriptions for each rating in all categories to guide annotators in their evaluations.
+
+---
+
+## 1. Content and Related Accuracy Rating
+
+**Purpose**: Assesses the factual correctness and alignment of the generated text with the original Knowledge Graph triples.
+
+- **Rating-A**: *Gold Standard*
+  - The generated text is completely accurate.
+  - All information aligns perfectly with the original triples.
+  - No factual errors or misinterpretations.
+- **Rating-B**: *Silver Standard*
+  - The text is mostly accurate.
+  - Minor deviations or omissions that do not significantly affect the overall understanding.
+  - Small inaccuracies that are acceptable but noticeable.
+- **Rating-F**: *Insufficient*
+  - Significant inaccuracies in the text.
+  - Misrepresentation of the information from the triples.
+  - Contains factual errors that could mislead the reader.
+- **Skipping**:
+  - Use if you cannot provide a rating due to ambiguity or lack of understanding.
+
+## 2. Structure, Grammar, and Fluency Rating
+
+**Purpose**: Evaluates the readability and technical writing quality of the generated text.
+
+- **Rating-A**: *Gold Standard*
+  - The text is well-structured and flows logically.
+  - Free of grammatical errors.
+  - Sentences are clear and concise.
+- **Rating-B**: *Silver Standard*
+  - Minor grammatical or structural errors.
+  - The text remains understandable.
+  - Minor issues that do not impede comprehension.
+- **Rating-F**: *Insufficient*
+  - Significant grammatical errors.
+  - Poor sentence structure.
+  - Difficult to read or understand due to errors.
+- **Skipping**:
+  - Use if you cannot provide a rating due to ambiguity or lack of understanding.
+
+## 3. Originality, Engagement, and Creativity Rating
+
+**Purpose**: Measures how engaging and creatively the information is presented in the generated text.
+
+- **Rating-A**: *Gold Standard*
+  - Highly original and engaging content.
+  - Creative presentation that captures the reader's interest.
+  - Uses compelling language and examples.
+- **Rating-B**: *Silver Standard*
+  - Shows some originality and engagement.
+  - Moderately interesting to read.
+  - Could be more creative or engaging but still acceptable.
+- **Rating-F**: *Insufficient*
+  - Lacks originality.
+  - The text is dull or uninteresting.
+  - Fails to engage the reader.
+- **Skipping**:
+  - Use if you cannot provide a rating due to ambiguity or lack of understanding.
+
+## 4. Generated Triple Rating
+
+**Purpose**: Evaluates the accuracy and completeness of the triple(s) generated from the generated text.
+
+- **Rating-A**: *Gold Standard*
+  - The generated triple accurately reflects the information in the text.
+  - No missing elements or inaccuracies.
+  - Properly formatted and complete.
+- **Rating-B**: *Silver Standard*
+  - Mostly accurate with minor inaccuracies or omissions.
+  - The main information is captured but could be improved.
+- **Rating-F**: *Insufficient*
+  - Inaccurate or incomplete triple.
+  - Does not represent the information from the text correctly.
+- **Skipping**:
+  - Use if you cannot provide a rating due to ambiguity or lack of understanding.
+
+---
+
+By adhering to these detailed descriptions, annotators can provide consistent and objective evaluations of the generated content, contributing to the overall quality and reliability of the dataset.
+
+Feel free to copy and paste these sections into your own README or documentation as needed.
+
+---
+
+# Example Evaluation
+
+To illustrate how to use the tool and apply the ratings, here's an example.
+
+**Original Triple**:
+
+- `(The Eiffel Tower, located in, Paris)`
+- `(The Eiffel Tower, height, 324 meters)`
+- `(The Eiffel Tower, built in, 1889)`
+
+**Generated Text**:
+
+> "Standing tall in the heart of Paris, the Eiffel Tower was constructed in 1889 and reaches a height of 324 meters."
+
+**Generated Triple**:
+
+- `(The Eiffel Tower, constructed in, 1889)`
+- `(The Eiffel Tower, has height, 324 meters)`
+- `(The Eiffel Tower, located in, Paris)`
+
+**Annotations**:
+
+1. **Content and Related Accuracy Rating**: **Rating-A**
+   - The generated text accurately reflects all the information from the original triples.
+2. **Structure, Grammar, and Fluency Rating**: **Rating-A**
+   - The text is well-written, grammatically correct, and flows naturally.
+3. **Originality, Engagement, and Creativity Rating**: **Rating-A**
+   - The text is engaging and presents the information creatively.
+4. **Generated Triple Rating**: **Rating-A**
+   - The regenerated triples accurately represent the information from the generated text.
+
+**Comments**:
+
+- "Excellent representation and presentation of the original data. The text is engaging and accurate."
+
+---
+
+# Frequently Asked Questions (FAQ)
+
+**Q1**: What if I disagree with the previous annotations?
+
+**A1**: This tool operates on a per-annotator basis. If you encounter previously annotated entries, provide your own evaluations based on your judgment.
+
+**Q2**: Can I pause and resume the annotation process?
+
+**A2**: Yes. The tool saves your progress, and you can resume from where you left off by running the script again with the same parameters.
+
+**Q3**: How are the annotations stored?
+
+**A3**: Annotations are saved in a CSV file within the `annotations` folder. Each submission appends a new row to this file.
+
+**Q4**: What does the "Skipping" option do?
+
+**A4**: Selecting "Skipping" allows you to move past an entry you cannot evaluate. The tool records that the entry was skipped.
+
+**Q5**: Can I modify the rating scales or categories?
+
+**A5**: Yes. You can adjust the code to change rating options or add new categories as needed.
+
+---
+
+# Contact Information
+
+For any inquiries or support regarding this tool, please contact:
+
+- **Name**: Kamyar Zeinalipour
+- **Email**: Kamyar.zeinalipour@unisi2.it
+- **GitHub**: [KamyarZeinalipour](https://github.com/KamyarZeinalipour/)
+
+---
+
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
----
-## Contact
 
-For any questions or issues, please contact Kamyar Zeinalipour at [Kzeinalipour@umass.edu].
