@@ -61,7 +61,7 @@ The tool is built using Python, Gradio for the web interface, and Pandas for dat
 
    **Dependencies**:
 
-   - Python 3.x
+   - Python 3.13.0
    - gradio==5.8.0
    - pandas==2.2.3
    - fire==0.7.0
