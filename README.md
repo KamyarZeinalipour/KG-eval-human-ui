@@ -42,8 +42,8 @@ The tool is built using Python, Gradio for the web interface, and Pandas for dat
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository
+   git clone https://github.com/KamyarZeinalipour/KG-eval-human-ui.git
+   cd KG-eval-human-ui
    ```
 
 2. **Create a Virtual Environment** (optional but recommended):
@@ -118,7 +118,7 @@ Each rating category has four options:
 - **Rating-F**
 - **Skipping**
 
-### Ratings Definitions
+### Rating Definitions
 
 #### 1. Content and Related Accuracy Rating
 
@@ -197,7 +197,7 @@ Annotated data is saved in a CSV file located in the `annotations` folder, named
 You can modify the tool to suit your specific needs. Here are some ways to customize it:
 
 - **Adjust Rating Options**: Modify the rating scales or categories in the code if your evaluation criteria change.
-- **Change Definitions**: Update the ratings definitions to match your project's guidelines.
+- **Change Definitions**: Update the rating definitions to match your project's guidelines.
 - **Add New Fields**: Include additional input or output fields in the interface and CSV file.
 - **Interface Design**: Customize the interface's appearance using Gradio's theming options or by modifying the CSS.
 
@@ -262,7 +262,7 @@ python annotation_tool.py --annotator_name="Bob" --examples_batch_folder="./data
 
 ## Contact
 
-For any questions or support, please contact [your email or contact information].
+For any questions or support, please contact me by Kamyar.zeinalipour@unisi2.it.
 
 ---
 
@@ -331,7 +331,7 @@ Below are the detailed descriptions for each rating in all categories to guide a
 
 ## 4. Generated Triple Rating
 
-**Purpose**: Evaluates the accuracy and completeness of the triple(s) generated from the generated text.
+**Purpose**: Evaluate the accuracy and completeness of the triple(s) generated from the generated text.
 
 - **Rating-A**: *Gold Standard*
   - The generated triple accurately reflects the information in the text.
@@ -356,7 +356,7 @@ Feel free to copy and paste these sections into your own README or documentation
 
 # Example Evaluation
 
-To illustrate how to use the tool and apply the ratings, here's an example.
+Here's an example of how to use the tool and apply the ratings.
 
 **Original Triple**:
 
@@ -366,7 +366,7 @@ To illustrate how to use the tool and apply the ratings, here's an example.
 
 **Generated Text**:
 
-> "Standing tall in the heart of Paris, the Eiffel Tower was constructed in 1889 and reaches a height of 324 meters."
+> "Standing tall in the heart of Paris, the Eiffel Tower was constructed in 1889 and reached a height of 324 meters."
 
 **Generated Triple**:
 
