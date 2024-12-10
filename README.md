@@ -423,11 +423,6 @@ For any inquiries or support regarding this tool, please contact:
 - **Email**: Kamyar.zeinalipour@unisi2.it
 - **GitHub**: [KamyarZeinalipour](https://github.com/KamyarZeinalipour/)
 
----
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 
