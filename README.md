@@ -40,7 +40,7 @@ If you don't yet have a `requirements.txt`, you can create one with the followin
 
 3. Run the annotation tool from the command-line. For example:
 
-       python your_script.py --current_index=0 --annotator_name="YourName" --examples_batch_folder="/path/to/your/examples.csv"
+       python annotation_tool.py --current_index=0 --annotator_name="YourName" --examples_batch_folder="/path/to/your/examples.csv"
 
    Replace:
    - `your_script.py` with the name of your Python script.
@@ -67,20 +67,7 @@ Once running, a web interface will appear (usually in your default browser). In 
 ## License
 
 This project is released under the MIT License.  
-Please see the [LICENSE](LICENSE) file for details, or include the following as the license notice if not using a separate file:
-
-    MIT License
-
-    Copyright (c) 2023, Kamyar Zeinalipour
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-    
-    (Include the full MIT License text as needed.)
+Please see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
