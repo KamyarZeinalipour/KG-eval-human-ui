@@ -54,7 +54,7 @@ def main(current_index: int = 0, annotator_name: str = "", examples_batch_folder
         prev_time  # hidden state: timestamp of previous click
     ):
         ratings = [content_accuracy_rating, structure_grammar_fluency_rating, originality_engagement_creativity_rating]
-        # If any rating is missing, do not update or change the UI.
+        # If any rating is missing (or empty string), do not update or change the UI.
         if any(r is None or r == '' or r == [] for r in ratings):
             return [
                 curr_idx, gr.update(interactive=False),
@@ -184,53 +184,47 @@ def main(current_index: int = 0, annotator_name: str = "", examples_batch_folder
 
         # Define a two-column layout.
         with gr.Row():
-            # LEFT COLUMN: The rating radio buttons, definitions and comments.
+            # LEFT COLUMN: The text boxes for display and comments.
             with gr.Column():
-                initial_text_box = gr.Textbox(label="Initial Text", interactive=False, value=df_row['initial_text'])
-                input_text_box = gr.Textbox(label="Input Text", interactive=False, value=df_row['input_text'])
+                initial_text_box = gr.Textbox(label="Small KG", interactive=False, value=df_row['initial_text'])
+                input_text_box = gr.Textbox(label="Text", interactive=False, value=df_row['input_text'])
+                gr.Markdown("**Comments:**")
                 comments = gr.Textbox(label="Comments")
             # RIGHT COLUMN: The rating radio buttons.
             with gr.Column():
+                # For Content and Related Accuracy Rating
                 content_accuracy_rating = gr.Radio(
-                    ["A", "B", "F", "Skipping"],
+                    ["A", "B", "C", "D", "E"],
                     label="Content and Related Accuracy Rating"
                 )
-                gr.Markdown("**Definitions for Content and Related Accuracy Rating:**")
-                gr.Markdown("""
-                - **Rating-A**: *Gold Standard* – The content is fully accurate and completely aligns with the original data.
-                - **Rating-B**: *Silver Standard* – The content is mostly accurate with minor deviations.
-                - **Rating-F**: *Insufficient* – The content is inaccurate or misaligned.
-                - **Skipping**: Skip this entry if you cannot provide a rating.
-                """)
+     
+                # For Structure, Grammar, and Fluency Rating
                 structure_grammar_fluency_rating = gr.Radio(
-                    ["A", "B", "F", "Skipping"],
+                    ["A", "B", "C", "D", "E"],
                     label="Structure, Grammar, and Fluency Rating"
                 )
-                gr.Markdown("**Definitions for Structure, Grammar, and Fluency Rating:**")
-                gr.Markdown("""
-                - **Rating-A**: *Gold Standard* – Well-structured, grammatically correct, and reads fluently.
-                - **Rating-B**: *Silver Standard* – Minor grammatical or structural errors.
-                - **Rating-F**: *Insufficient* – Significant grammatical or structural issues.
-                - **Skipping**: Skip this entry if you cannot provide a rating.
-                """)
+
+                # For Originality, Engagement, and Creativity Rating
                 originality_engagement_creativity_rating = gr.Radio(
-                    ["A", "B", "F", "Skipping"],
+                    ["A", "B", "C", "D", "E"],
                     label="Originality, Engagement, and Creativity Rating"
                 )
-                gr.Markdown("**Definitions for Originality, Engagement, and Creativity Rating:**")
-                gr.Markdown("""
-                - **Rating-A**: *Gold Standard* – Highly original, engaging, and creatively presented.
-                - **Rating-B**: *Silver Standard* – Some originality and moderate engagement.
-                - **Rating-F**: *Insufficient* – Lacks originality and fails to engage.
-                - **Skipping**: Skip this entry if you cannot provide a rating.
-                """)
                 
                 # The main button to save the annotation and continue.
                 eval_btn = gr.Button("Save and Continue", interactive=False)
                 # New button to go back and edit a previous annotation.
                 back_btn = gr.Button("Go Back", interactive=True)
+                gr.Markdown("**Definitions for Rating:**")
+                gr.Markdown("""
+                - **A**: Excellent
+                - **B**: Very Good 
+                - **C**: Average 
+                - **D**: Below Average 
+                - **E**: Poor
+                """)
+
         
-        # Update the Validate button state when any radio selection changes.
+        # Update the Validate button state when any rating radio selection changes.
         def update_validate_button(content_acc, structure_gram, originality_eng):
             return enable_button(content_acc, structure_gram, originality_eng)
         
