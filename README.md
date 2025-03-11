@@ -10,7 +10,6 @@ This project is an interactive text annotation tool built with Python and Gradio
   - Originality, Engagement, and Creativity Rating (A, B, F, Skipping)
 - Save annotations to a CSV file. If an annotation for a particular sample already exists (tracked by the sample's index), it updates the annotation instead of creating a new one.
 - “Go Back” functionality lets annotators navigate to the preceding example and review or modify their ratings and comments.
-- Uses a simple, user-friendly web interface provided by Gradio.
 
 ## Requirements
 
