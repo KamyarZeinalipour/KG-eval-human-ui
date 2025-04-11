@@ -1,7 +1,3 @@
-Sure! Here's a well-structured and clear `README.md` file for your annotation tool, incorporating both usage instructions and the annotation guideline:
-
----
-
 # 🧠 Knowledge Graph Annotation Tool
 
 This tool is designed to help annotators evaluate knowledge graph (KG) generations from two models, based on their adherence to structure, preservation of meaning, and semantic quality.
