@@ -1,0 +1,91 @@
+Below is a guideline you can use for rating a generated knowledge graph on a scale of A to E. The three main evaluation areas are:
+
+1. Template Adherence  
+2. Meaning Preservation  
+3. Structural and Semantic Quality of the Triples
+
+─────────────────────────────  
+A – Excellent
+
+• Template Adherence:  
+ – Exactly 5 triples are present, no more and no less.  
+ – Each triple strictly follows the format:  
+  (Subject -> Predicate -> Object)  
+ – There is no extraneous text beyond the five triples.
+
+• Meaning Preservation:  
+ – All triples capture key facts or relationships from the original text.  
+ – The extracted entities and relationships reflect the core meaning and context accurately.
+
+• Structural & Semantic Quality:  
+ – Each triple is fully formed with clear and complete subject, predicate, and object.  
+ – Relations are not only grammatically correct but also logically and factually sound.  
+ – The triples show thoughtful and insightful linking of entities from the context.
+
+─────────────────────────────  
+B – Good
+
+• Template Adherence:  
+ – Generally follows the format with 5 triples, though there might be very minor formatting inconsistencies (e.g., extra whitespace).  
+ – No additional text appears outside the prescribed structure.
+
+• Meaning Preservation:  
+ – Most triples accurately reflect key points of the text, with only minor omissions or slight misinterpretation of some details.  
+
+• Structural & Semantic Quality:  
+ – The triples are mostly well structured.  
+ – There might be one or two cases where the relationships could be clearer, but overall the semantic links are correct and useful.
+
+─────────────────────────────  
+C – Satisfactory
+
+• Template Adherence:  
+ – The output provides roughly 5 triples, but there may be slight deviations (e.g., one triple is not in the prescribed format or an extra, non-essential line is included).  
+ – Minor formatting issues exist but the general structure is recognizable.
+
+• Meaning Preservation:  
+ – The main ideas of the original text are captured, though some key details or nuances might be missing.  
+ – There may be slight drift or overgeneralization in some relationships.
+
+• Structural & Semantic Quality:  
+ – Most of the triples are valid, but one or two might have ambiguous or weakly defined relationships.  
+ – Some triples may seem generic or less informative than desired.
+
+─────────────────────────────  
+D – Poor
+
+• Template Adherence:  
+ – The expected 5 triples might be compromised (e.g., too few or too many, or several not following the prescribed format).  
+ – There could be noticeable deviations or extra texts interfering with the neat list of triples.
+
+• Meaning Preservation:  
+ – Several key aspects of the text are misinterpreted or omitted.  
+ – There’s a lack of alignment between the extracted triples and the intention of the original content.
+
+• Structural & Semantic Quality:  
+ – Multiple triples have vague, incomplete, or unclear relationships.  
+ – The relation between subject and object might be forced or incorrect in one or more cases, reducing the overall clarity of the knowledge graph.
+
+─────────────────────────────  
+E – Unacceptable
+
+• Template Adherence:  
+ – Fails to generate exactly 5 triples; the output may include less than or more than 5, or use a completely different or inconsistent format.  
+ – The structure deviates widely from the prescribed format (wrong symbols, inconsistent separators, etc.).
+
+• Meaning Preservation:  
+ – The output does not reflect the meaningful content of the original text.  
+ – The triples might be irrelevant, randomly generated, or completely off-topic.
+
+• Structural & Semantic Quality:  
+ – The generated triples are poorly constructed, with many cases of missing or incoherent subject, predicate, or object.  
+ – Relationships may be incorrect, contradictory, or nonsensical, undermining the purpose of a knowledge graph.
+
+─────────────────────────────  
+Usage Tips for Rating:
+
+• First, count and check the explicit format of the output (Does it show exactly 5 triples in the prescribed format?).  
+• Next, compare each triple with the original text: Are the entities and their relationships clearly and accurately drawn from the text?  
+• Finally, assess the overall clarity, logic, and quality of the relations between entities in every triple.
+
+By using these criteria, you can provide a fair rating from A (excellent) to E (unacceptable) for the generated knowledge graph output.
